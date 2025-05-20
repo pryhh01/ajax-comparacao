@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head><title>Async/Await</title></head>
+<body>
+  <button onclick="carregar()">Carregar Dados</button>
+  <div id="conteudo"></div>
+
+  <script>
+    async function carregar() {
+      try {
+        const response = await fetch("dados.txt");
+        const data = await response.text();
+        document.getElementById("conteudo").innerText = data;
+      } catch (error) {
+        console.error("Erro ao carregar:", error);
+      }
+    }
+  </script>
+</body>
+</html>
