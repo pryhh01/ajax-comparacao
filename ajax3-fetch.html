@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Fetch API</title>
+</head>
+<body>
+  <h2>Exemplo com Fetch</h2>
+  <button onclick="carregar()">Carregar Dados</button>
+  <div id="conteudo"></div>
+
+  <script>
+    function carregar() {
+      fetch("dados.txt")
+        .then(response => {
+          if (!response.ok) {
+            throw new Error("Erro na requisição: " + response.status);
+          }
+          return response.text();
+        })
+        .then(data => {
+          document.getElementById("conteudo").innerText = data;
+        })
+        .catch(error => {
+          console.error("Erro ao carregar:", error);
+          document.getElementById("conteudo").innerText = "Erro ao carregar os dados.";
+        });
+    }
+  </script>
+</body>
+</html>
