@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head><title>Promise</title></head>
+<body>
+  <button onclick="carregar()">Carregar Dados</button>
+  <div id="conteudo"></div>
+
+  <script>
+    function getData(url) {
+      return new Promise(function(resolve, reject) {
+        const xhr = new XMLHttpRequest();
+        xhr.open("GET", url);
+        xhr.onload = () => xhr.status === 200 ? resolve(xhr.responseText) : reject("Erro");
+        xhr.onerror = () => reject("Erro de rede");
+        xhr.send();
+      });
+    }
+
+    function carregar() {
+      getData("dados.txt")
+        .then(data => {
+          document.getElementById("conteudo").innerText = data;
+        })
+        .catch(error => console.error("Erro:", error));
+    }
+  </script>
+</body>
+</html>
